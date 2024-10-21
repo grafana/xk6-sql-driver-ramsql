@@ -4,11 +4,14 @@ import driver from "k6/x/sql/driver/ramsql";
 const db = sql.open(driver, "test_db");
 
 export function setup() {
-  db.exec(`CREATE TABLE IF NOT EXISTS namevalue (
-             id INTEGER PRIMARY KEY AUTOINCREMENT,
-             name VARCHAR NOT NULL,
-             value VARCHAR
-           );`);
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS roster
+      (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        given_name VARCHAR NOT NULL,
+        family_name VARCHAR NOT NULL
+      );
+  `);
 }
 
 export function teardown() {
@@ -16,10 +19,19 @@ export function teardown() {
 }
 
 export default function () {
-  db.exec("INSERT INTO namevalue (name, value) VALUES('extension-name', 'xk6-foo');");
+  let result = db.exec(`
+    INSERT INTO roster
+      (given_name, family_name)
+    VALUES
+      ('Peter', 'Pan'),
+      ('Wendy', 'Darling'),
+      ('Tinker', 'Bell'),
+      ('James', 'Hook');
+  `);
+  console.log(`${result.rowsAffected()} rows inserted`);
 
-  let results = sql.query(db, "SELECT * FROM namevalue WHERE name = $1;", "extension-name");
-  for (const row of results) {
-    console.log(`name: ${row.name}, value: ${row.value}`);
+  let rows = db.query("SELECT * FROM roster WHERE given_name = $1;", "Peter");
+  for (const row of rows) {
+    console.log(`${row.family_name}, ${row.given_name}`);
   }
 }
