@@ -27,8 +27,6 @@ jobs:
         uses: grafana/setup-xk6@v1.0.0
         with:
           xk6-version: "0.19.2"
-      - name: Install xk6
-        run: go install go.k6.io/xk6/cmd/xk6@latest
       - name: Build
         run: make build
       - name: Test
