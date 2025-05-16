@@ -6,7 +6,6 @@ metadata:
   description: |
     Repository template for creating xk6-sql driver repositories
   annotations:
-    backstage.io/techdocs-ref: dir:.
     github.com/project-slug: grafana/xk6-sql-driver-ramsql
 spec:
   type: library
