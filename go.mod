@@ -1,6 +1,6 @@
 module github.com/grafana/xk6-sql-driver-ramsql
 
-go 1.23.0
+go 1.24
 
 require (
 	github.com/grafana/xk6-sql v1.0.5
