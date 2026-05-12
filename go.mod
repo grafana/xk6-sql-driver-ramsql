@@ -2,6 +2,8 @@ module github.com/grafana/xk6-sql-driver-ramsql
 
 go 1.25.0
 
+toolchain go1.25.10
+
 require (
 	github.com/grafana/xk6-sql v1.1.0
 	github.com/proullon/ramsql v0.1.4
