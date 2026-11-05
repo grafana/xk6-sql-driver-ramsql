@@ -6,7 +6,7 @@ toolchain go1.26.10
 
 require (
 	github.com/grafana/xk6-sql v1.2.4
-	github.com/proullon/ramsql v0.1.4
+	github.com/proullon/ramsql v0.1.5
 )
 
 require (
